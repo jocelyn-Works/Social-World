@@ -1,0 +1,30 @@
+<div class="left-bar">
+    <div class="logo">
+        <a href="{{path('home')}}">
+            <img src="{{ asset('build/images/logosocial.png')}}" alt="logo">
+        </a>
+    </div>
+    <nav class="left-nav">
+        <div >
+            <a href="">       
+                <i class="fa-solid fa-house"></i>
+                 Accueil
+            </a>
+        </div>
+        <div>
+            <a href="">
+                <i class="fa-brands fa-twitter"></i>
+                 Mes Poste
+            </a>
+        </div>
+        <div>
+            <details>
+                <summary><i class="fa-solid fa-gear"></i>Profil</summary>
+                <ul><i class="fa-solid fa-address-card"></i><a href="{{path('changeProfil')}}">Modifiez mon profil</a></ul>
+                <uli><i class="fa-solid fa-lock"></i><a href="{{path('changePassword')}}">Modifiez mon mot de passe</a></uli>
+            </details>
+            
+        </div>
+       
+    </nav>
+</div>

@@ -1,0 +1,44 @@
+
+// ------user  ---------//
+.profil-user{
+    width: 85%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .user-info{
+        width: 100%;
+        height: 35vh;
+        margin-bottom: 5vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: xx-large;
+        background-image: url('/assets/images/fond-user1.jpg');
+        background-position: center;
+        background-size: cover;
+        
+        & img{
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            
+        }
+    }
+    .user-title{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 3vh;
+        letter-spacing: 4px;
+        font-family: 'Lobster Two', cursive;
+        font-size: xx-large;
+        font-weight: bold;
+        color: $primary;
+        text-shadow: 1px 0px 0px black;
+    }
+    .userform{
+        display: flex;
+        justify-content: center;
+        
+    }
+}

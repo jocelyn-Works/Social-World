@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Social World{% endblock %}
+
+{% block body %}
+{% include "partials/_leftbar.html.twig" %}
+
+<div class="profil-user">
+    <header>
+        <div class="user-info">
+            <a href="{{path('current_user')}}">
+                <img src="{{asset(app.user.picture)}} " alt="profil-picture">
+            </a>
+            <h1>Bonjour {{app.user.fullname}}</h1>
+        </div>
+        <div class="user-title">
+            <h1>Modifiez Vos infos de Profil</h1>
+        </div>
+        <div class="userform">
+            {{ form_start(form) }}
+            {{ form_rest(form) }}
+            <button class="btn btn-primary">Modifier</button>
+            {{ form_end (form) }}
+        </div>
+    </header>
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Social project{% endblock %}
+
+{% block body %}
+{% include "partials/_leftbar.html.twig" %}
+
+<div class="content-boby">
+
+<div class="post-comment">
+    <div class="img-post-comment">
+        {# <a href="{{path('user', {id: comment.author.id}) }}"> #}
+
+        <img src="{{ asset(app.user.picture)}}"class="avatar-post-comment">
+    </div>
+    <div class="row-comment">
+        <div class="post-comment-info">
+            <h3>@ {{post.author.fullname}}</h3>
+            <small>{{post.createdAt | ago(locale= 'fr')}}</small>
+        </div>
+        {# </a> #}
+        <div class="post-comment-content">
+            <p>{{ post.content }}</p>
+        </div>
+        <div class="row-icone-comment">
+            {% include "partials/_rating.html.twig" with{rating: post.rating, from: 'post', id: post.id} %}
+        </div>
+    </div>      
+</div>
+
+    <div class="stop-post"></div>
+
+<div class="form-comment">
+    {% if form is defined %}
+    <div class="comment-form">
+        {{ form_start(form) }}
+            {{form_rest(form)}}
+            <button class="btn btn-primary ">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+    {% endif %}
+    
+</div>
+<div class="scroll">
+    <ul>
+        {% for comment in post.comments %}
+        <div class="post-show">
+            <div class="img-avatar">
+                <a href="{{path('user', {id: comment.author.id}) }}">
+                <img src="{{ asset(comment.author.picture)}}" alt="" class="avatar" >
+            </div>
+            <div class="post-show-content">
+                <div class="post-info-user">
+                    <h3>@ {{comment.author.fullname}}</h3>
+                </a>
+                    <small class="justify-content-end mr-10 ">{{comment.createdAt | ago(locale= 'fr')}}</small>
+                </div>
+                <div class="post-user-content">
+                    <p>{{ comment.content }}</p>
+                </div>
+                <div class="post-user-icone">
+                    <div class="row-icone">
+                    {% include "partials/_rating.html.twig" with{rating: comment.rating, from: 'comment', id: comment.id} %}
+                        
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+</div>
+</div>
+{% include "partials/_rightbar.html.twig" %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<div class="rating">
+    <a href="{{path(from ~ '_rating', {id: id,score: 1})}}">
+        <i class="fa-solid fa-thumbs-up fa-lg {{rating > 0 ? 'rating-up' : ''}} "></i>
+    </a>
+    <p class=" text-small {{rating > 0 ? 'rating-up' :rating < 0 ? 'rating-down' : ''}} ">
+        {{rating}}
+    </p>
+    <a href="{{path(from ~ '_rating', {id: id,score: -1})}}">
+        <i class="fa-solid fa-thumbs-down fa-lg {{rating < 0 ? 'rating-down' : ''}} "></i>
+    </a>
+</div>

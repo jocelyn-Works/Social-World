@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.fullname }}{% endblock %}
+
+{% block body %}
+{% include "partials/_leftbar.html.twig" %}
+
+<div class="profil-user">
+    <header>
+        <div class="user-info">
+            <a href="{{path('changeProfil')}}">
+                <img src="{{asset(app.user.picture)}} " alt="profil-picture">
+            </a>
+            <h1>Bonjour {{app.user.fullname}}</h1>
+        </div>
+        
+    </header>
+    <div class="user-post">
+        
+        {% for post in user.post %}
+            <h3>{{post.content}}</h3>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

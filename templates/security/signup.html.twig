@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="signup">
+    <header class="header-title">
+        <img src="{{ asset('build/images/logosocial.png')}}" alt="logo">
+        <span>C</span>
+        <span>o</span>
+        <span>n</span>
+        <span>n</span>
+        <span>e</span>
+        <span>c</span>
+        <span>t</span>
+        <span>e</span>
+        <span>z</span>
+        <span>&nbsp;</span>
+        <span>v</span>
+        <span>o</span>
+        <span>u</span>
+        <span>s</span>
+        <span>&nbsp;</span>
+        <span>a</span>
+        <span>u</span>
+        <span>&nbsp;</span>
+        <span>m</span>
+        <span>o</span>
+        <span>n</span>
+        <span>d</span>
+        <span>e</span>
+        <span>&nbsp;</span>
+        <span>a</span>
+        <span>v</span>
+        <span>e</span>
+        <span>c</span>
+        
+
+            <div class="social-lobster">
+                <p>Social World</p>
+               
+            </div>
+    </header>
+    <div class="social-world">
+        {% include "partials/_socialworld.html.twig" %}
+        <div class="form-signup">
+            <h1>Inscription</h1>
+            {{form_start(form)}}
+            {{form_rest(form)}}
+            <div class="row">
+                <button class="btn btn-primary">S'inscrire</button>
+                {{form_end(form)}}   
+                <a href="{{path('login')}}">Se connecter</a>
+            </div>
+        </div>
+        
+    </div>
+    <footer>
+        <p>Social World, &copy; Jocelyn Grelier 2023 - 2034</p>
+    </footer>
+</div>
+    {% endblock %}

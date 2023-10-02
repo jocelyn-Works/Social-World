@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Social project{% endblock %}
+
+{% block body %}
+{% include "partials/_leftbar.html.twig" %}
+
+<div class="content-boby">
+
+    <div class="post">
+        <div class="post-title">
+            <h1>Accueil</h1>
+        </div>
+        <div class="post-content">
+            <div class="img-post">
+                <a href="{{path('current_user')}}">
+                    <img src="{{asset(app.user.picture) }}" class="avatar-post">
+                </a> 
+            </div>  
+             
+        {{ form_start(postForm) }}
+                {{form_rest(postForm)}}
+                <div class="envoyer-post">
+                <button class="btn btn-primary  ">Envoyer</button>
+                </div>
+        {{ form_end(postForm) }}
+        </div>
+    </div>
+    <div class="stop-post"></div>
+
+    {# --------   post show ------------ #}
+    <div class="scroll">
+        <ul>
+            {% for post in posts %}
+            <div class="post-show">
+                <div class="img-avatar">
+                    <a href="{{path('user', {id: post.author.id}) }}">
+                        <img src="{{ asset(post.author.picture)}}" alt="" class="avatar" >
+                    </div>
+                    <div class="post-show-content">
+                        <div class="post-info-user">
+                            <h3>@ {{post.author.fullname}}</h3>
+                        </a>
+                            <small class="justify-content-end mr-10 ">{{post.createdAt | ago(locale= 'fr')}}</small>
+                        </div>
+                    <div class="post-user-content">
+                        <p>{{ post.content }}</p>
+                    </div>
+                    <div class="post-user-icone">
+                        <div class="row-icone">
+                            <div class="comment-icone">
+                                <a href="{{path('post_show', {id:post.id})}}">
+                                    <i class="fa-regular fa-comment fa-lg"></i>
+                                </a>
+                            </div>
+                            <p>{{post.nbresonse}}</p>
+                            
+                            {% include "partials/_rating.html.twig" with{rating: post.rating, from: 'post', id: post.id} %}
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% include "partials/_rightbar.html.twig" %}
+
+{% endblock %}

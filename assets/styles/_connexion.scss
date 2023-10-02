@@ -1,0 +1,62 @@
+
+.form-connexion{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 6vh;
+    margin-left: 5rem;
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+        
+      }
+            h1 {
+                font-size: xx-large;
+                margin-bottom: 20px;
+              }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                label {
+                    display: block;
+                    letter-spacing: 2px;
+                    font-family: 'Lobster Two', cursive;
+                    font-size: x-large;
+                    font-weight: bold;
+                    color: $primary;
+                    text-shadow: 1px 0px 0px black;
+                    margin-bottom: 5px;
+                }
+                & input{
+                    width: 20rem;
+                    padding: 5px;
+                    border: 2px solid #ccc;
+                    border-radius: 10px;
+                    font-size: 16px;
+                    line-height: 1.5;
+                    margin-bottom: 2vh;
+                    &:focus{
+                        border: 3px solid $primary; 
+                      }
+                }
+                
+            } 
+            .remember-me{
+                margin: 2vh 0;
+            } 
+    .row-connexion{
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 2vh;
+    }        
+}
