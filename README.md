@@ -1,36 +1,19 @@
-# Social World 
+## Social World 
+social networks project with Symfony 
 
-Projet symfony d'un reseaux sociaux 
-
-Symfony social network project
-
-![conected](public/build/images/screenshot.d99cc496.png)
-
-## how does it works
 Registration, Connection and the possibility of resetting your password by sending an email.
+The user must log in to access the application where he can publish, like, comment and add friends for their published messages
 
-the user must log in to access the application where he can publish, like, comment and add friends to post private publications
+![connected](public/build/images/screenshot.d99cc496.png)
 
-## Technologies used
+## technologies used 
 
-web pack encore : 
-javascipt
-scss
+### Frontend :
+- **Twig:** 
+- **Webpack Encore:**
+                    - **SCSS:** 
+                    - **JavaScript:** 
 
+### Backend :
+- **Symfony:** PHP Framework 
 
-# composer 
-- doctrine 
-- maker
-- twig
-- twig/intl-extra
-- twig/extra-bundle
-- asset
-- symfony/webpack-encore-bundle
-- profiler
-- form validator
-- security
-- rate-limiter
-- translation
-- knplabs/knp-time-bundle
-- mailer
-- symfony/lock
