@@ -1,63 +1,28 @@
-
 {% extends 'base.html.twig' %}
-
-{% block title %}Connexion{% endblock %}
-
-
+{% block title %}Social World{% endblock %}
 {% block body %}
-
 <div class="signup">
     <header class="header-title">
-        <img src="{{ asset('build/images/logosocial.png')}}" alt="logo">
-        <span>C</span>
-        <span>o</span>
-        <span>n</span>
-        <span>n</span>
-        <span>e</span>
-        <span>c</span>
-        <span>t</span>
-        <span>e</span>
-        <span>z</span>
-        <span>&nbsp;</span>
-        <span>v</span>
-        <span>o</span>
-        <span>u</span>
-        <span>s</span>
-        <span>&nbsp;</span>
-        <span>a</span>
-        <span>u</span>
-        <span>&nbsp;</span>
-        <span>m</span>
-        <span>o</span>
-        <span>n</span>
-        <span>d</span>
-        <span>e</span>
-        <span>&nbsp;</span>
-        <span>a</span>
-        <span>v</span>
-        <span>e</span>
-        <span>c</span>
-        
-
+        <span>C</span><span>o</span><span>n</span><span>n</span><span>e</span><span>c</span><span>t</span><span>e</span><span>z</span><span>&nbsp;</span><span>v</span><span>o</span><span>u</span><span>s</span><span>&nbsp;</span><span>a</span><span>u</span><span>&nbsp;</span><span>m</span><span>o</span><span>n</span><span>d</span><span>e</span><span>&nbsp;</span><span>a</span><span>v</span><span>e</span><span>c</span>
         <div class="social-lobster">
-            <p>Social World</p>
-           
+            <a href="{{path('signup')}}"><p>Social World</p></a>
         </div>
     </header>
     <div class="social-world">
         {% include "partials/_socialworld.html.twig" %}
-
         <div class="form-connexion">
-
-            <h1>Connexion</h1>
+            <h2>Connexion</h2>
                 <form action="{{ path('login') }}" method="post">
                     <label for="email">Email</label>
-                    <input type="text" name="_username" id="email" value="{{username}}" autofocus>
+                    <input type="email" name="_username" id="email" value="{{username}}" autofocus>
                     <label for="password">Mot de passe </label>
-                    <input type="password" name="_password" id="password">
+                    <input type="password"  name="_password" id="password">
                     <input type="hidden" name="_csrf_token" value="{{csrf_token('authenticate')}}"> 
                     <button class="btn btn-primary">Se connecter</button>
                 </form>
+                <script>
+
+                </script>
                 <div class="remember-me">
                     <label for="remember_me">
                         <input type="checkbox" name="_remember_me" id="remember_me">
@@ -66,21 +31,16 @@
                 </div>
                 <div class="row-connexion">
                     <a href="{{path('signup')}}">Vous n'avez pas de compte ?</a>
-                    <a href="">Mot de passe oublie ?</a>
+                    <a href="{{path('reset-password-request')}}">Mot de passe oublie ?</a>
                 </div>
                    
                 {% if error %}
                     <div>{{error.messageKey}}</div>
                 {% endif %}
-            </div>
-            
-            
-        
+        </div>
     </div>
     <footer>
-        <p>Social World, &copy; Jocelyn Grelier 2023 - 2034</p>
+        <span>Social World</span><p> &copy; Jocelyn Grelier 2023 - 2024</p>
     </footer>
 </div>
-
-
 {% endblock %}

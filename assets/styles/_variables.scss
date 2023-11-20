@@ -1,10 +1,29 @@
 
-
 $primary: rgb(0,145,250);
+$darkprimary:rgb(6, 83, 150);
 $danger:rgb(198, 1, 1);
 $size: x-large;
-$color-primary: white;
+$white: white;
+$black:black;
+
 $gray:#818284;
-$borde-radius: 5px;
+
+$border-radius: 5px;
 $box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
 $font-family: 'Open Sans', sans-serif;
+
+// social world 
+$lobster: "Lobster Two", cursive;
+// dark mode
+$gray-light: rgba(226, 226, 226, 0.671);
+$dark-black:rgba(0, 0, 0, 0.527);
+$switch-bcg:#f5f5f6;
+$switch-circle:rgb(0,145,250);
+$icon-sun:#f3ac07;
+$icon-moon:#B1B0B5;
+// $switche-circle-pos:41.6rem;
+
+// --- content box ----- //
+$box-content-dark: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+$box-content-light:rgba(157, 157, 157, 0.658) 0px 5px 15px; 
+

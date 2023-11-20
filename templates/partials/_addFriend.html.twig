@@ -1,0 +1,37 @@
+
+<div class="right">
+    <div class="title">
+        <h2>Ajoute des Ami(e)s</h2><i class="fa-solid fa-angles-right fa-2xl"></i>
+    </div>
+    {% for cat, list in app.flashes%}
+        {% for message in list %}
+            <div class="messageFlashe">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="scroll-add">
+        <div class="search-bar">
+            <input type="search" id="searchInput" placeholder="  Rechercher un ami">
+        </div>
+        <ul>
+            <div class="add-freinds">
+            {% for addfriend in addfriends %}
+            <div class="row-user">
+                <a href="{{path('user', {id: addfriend.id}) }}"><img  src="{{ asset(addfriend.picture)}}" alt=""></a>
+                <div class="row">
+                    {{addfriend.fullname}}
+                </div>
+                <a href="{{path('add-friend', {'id': addfriend.id} )}}">
+                    <div class="addUserIcone">
+                        <i class="fa-solid fa-user-plus fa-lg"></i>
+                    </div>
+                </a>
+               
+            </div> 
+                {% endfor %}
+            </div>
+        </ul>
+    </div>
+ 
+</div>

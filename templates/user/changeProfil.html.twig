@@ -1,28 +1,38 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Social World{% endblock %}
-
-{% block body %}
-{% include "partials/_leftbar.html.twig" %}
-
-<div class="profil-user">
-    <header>
+{%block body %}
+ {% include "partials/_navBar.html.twig" %}
+<div class="row">
+  {% include "partials/_notification.html.twig" %}
+  <div class="content-boby">
+    <div class="profil-user">
+      <header>
         <div class="user-info">
-            <a href="{{path('current_user')}}">
-                <img src="{{asset(app.user.picture)}} " alt="profil-picture">
-            </a>
-            <h1>Bonjour {{app.user.fullname}}</h1>
+          <a href="{{ path('current_user') }}">
+            <img src="{{ asset(app.user.picture) }} " alt="profil-picture" />
+          </a>
+          <h2>Bonjour {{ app.user.firstname }}</h2>
         </div>
         <div class="user-title">
-            <h1>Modifiez Vos infos de Profil</h1>
+          <h1>Modifiez Vos infos de Profil</h1>
         </div>
         <div class="userform">
-            {{ form_start(form) }}
-            {{ form_rest(form) }}
+          {{ form_start(form) }}
+          {{ form_row(form.picture, { 'attr': {'style': 'display: none;'} }) }}
+          <i id="upload-icon" class="fa-regular fa-image fa-2xl" style="cursor: pointer;"></i>
+          {{ form_rest(form) }}
+          
             <button class="btn btn-primary">Modifier</button>
-            {{ form_end (form) }}
+          {{ form_end(form) }}
         </div>
-    </header>
+         <script>
+              document.getElementById('upload-icon').addEventListener('click', function() {
+              document.getElementById('{{ form.picture.vars.id }}').click();
+              });
+      </script>
+      </header>
+    </div>
+  </div>
+  {% include "partials/_friendslist.html.twig" %}
 </div>
-
 {% endblock %}

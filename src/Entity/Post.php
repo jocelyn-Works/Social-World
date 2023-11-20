@@ -13,12 +13,23 @@ use Doctrine\DBAL\Types\Types;
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
 {
+
+    public const STATUS_PUBLIC = 'public';
+    public const STATUS_PRIVATE = 'private';
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column (length: 255, type: 'string')]
+    private string $status;
+
+    #[ORM\Column(type: Types::TEXT)] 
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9!@#$%^&*(),.?:{}|]*$/',
+        message: 'Le champ peut contenir des lettres majuscules, minuscules, chiffres et certains symboles.'
+    )] 
     #[Assert\NotBlank(message: "ce champs ne peut etre vide")]
     #[Assert\Length( min : 5, minMessage: 'Veuillez détailler votre post')]
     private ?string $content = null;
@@ -42,15 +53,35 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Vote::class)]
     private Collection $votes;
 
+    #[ORM\Column( nullable:true)]
+    private ?string $picture = null;
+
+    #[ORM\ManyToOne]
+    private ?User $receiver = null;
+
     public function __construct()
     {
+        $this->createdAt = new \DateTimeImmutable();
         $this->comments = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->status = self::STATUS_PUBLIC;
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status):self
+    {
+        $this->status =$status;
+
+        return $this;
     }
 
     public function getContent(): ?string
@@ -169,6 +200,30 @@ class Post
                 $vote->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getReceiver(): ?User
+    {
+        return $this->receiver;
+    }
+
+    public function setReceiver(?User $receiver): static
+    {
+        $this->receiver = $receiver;
 
         return $this;
     }

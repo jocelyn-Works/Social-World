@@ -1,0 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two:wght@700&family=Mulish&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+html {
+    font-family: 'Open Sans', sans-serif;
+    color: #636466;
+} 
+a{
+display: inline-block;
+ color: white;
+text-decoration: none;
+padding: 10px 25px;
+margin-top: 20px;
+background-color: rgb(0,145,250);
+border-radius: 3px;
+}
+h1{
+    font-family: "Lobster Two", cursive;
+    text-transform: capitalize;
+    color: rgb(0,145,250);
+    letter-spacing: 2px;
+    font-size: 4rem;
+    text-shadow: 
+                -1px -1px 0 black,  
+                0.5px -1px 0 black,
+                -1px 1px 0 black,
+                0.5px 1px 0 black;        
+            
+}

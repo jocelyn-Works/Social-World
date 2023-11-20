@@ -1,0 +1,23 @@
+<header>
+    <nav class="nav-bar">
+        <div class="logo">
+            <h1>Social <a href="{{path('post')}}">W</a>orld</h1>
+        </div>
+        
+        <div class="menu">
+            <a href="{{path('post')}}" class="active" ><i class="fa-solid fa-house fa-2xl"></i></a>
+            <h2>{{app.user.fullname}}</h2>
+            <a href="#" id="settingsIcon" ><i class="fa-solid fa-user fa-2xl"></i></a>
+        </div>
+        <div class="settings-menu">
+            <ul>
+                <li><a href="{{path('changeProfil')}}" id="profileOption"  >Modifier mon profil</a></li>
+                <li><a href="{{path('changePassword')}}" id="passwordOption"  >Modifier mon mot de passe</a></li>
+                <li><a href="{{path('user', {'id': app.user.id})}}" id="passwordOption"  >Profil</a></li>
+            </ul>
+        </div>
+        <div class="deconnexion">
+            <a href="{{path('logout')}}" class="btn btn-primary" >Deconnexion</a>
+        </div>
+    </nav>
+</header>

@@ -3,24 +3,31 @@
 {% block title %}Social project{% endblock %}
 
 {% block body %}
-{% include "partials/_leftbar.html.twig" %}
+{% include "partials/_navBar.html.twig" %}
 
+<div class="row">
+{% include "partials/_notification.html.twig" %}
 <div class="content-boby">
-
+    <div class="scroll-comment">
 <div class="post-comment">
     <div class="img-post-comment">
-        {# <a href="{{path('user', {id: comment.author.id}) }}"> #}
-
-        <img src="{{ asset(app.user.picture)}}"class="avatar-post-comment">
+        <a href="{{path('user', {id: post.author.id}) }}">
+            <img src="{{ asset(post.author.picture)}}"class="avatar-post-comment">
+        </a>
     </div>
     <div class="row-comment">
         <div class="post-comment-info">
             <h3>@ {{post.author.fullname}}</h3>
             <small>{{post.createdAt | ago(locale= 'fr')}}</small>
         </div>
-        {# </a> #}
         <div class="post-comment-content">
             <p>{{ post.content }}</p>
+            {% if post.picture %}
+                <div class="postimage">
+                    <img src="{{ asset(post.picture) }}" >
+                </div>
+            {% endif %}
+            
         </div>
         <div class="row-icone-comment">
             {% include "partials/_rating.html.twig" with{rating: post.rating, from: 'post', id: post.id} %}
@@ -28,7 +35,6 @@
     </div>      
 </div>
 
-    <div class="stop-post"></div>
 
 <div class="form-comment">
     {% if form is defined %}
@@ -41,7 +47,7 @@
     {% endif %}
     
 </div>
-<div class="scroll">
+
     <ul>
         {% for comment in post.comments %}
         <div class="post-show">
@@ -71,6 +77,7 @@
     </ul>
 </div>
 </div>
-{% include "partials/_rightbar.html.twig" %}
+{% include "partials/_friendslist.html.twig" %}
+</div>
 
 {% endblock %}

@@ -18,6 +18,10 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9!@#$%^&*(),.?:{}|]*$/',
+        message: 'Le champ peut contenir des lettres majuscules, minuscules, chiffres et certains symboles.'
+    )]  
     #[Assert\NotBlank(message: "ce champs ne peut etre vide")]
     #[Assert\Length( min : 5, minMessage: 'Veuillez détailler votre commentaire')]
     private ?string $content = null;
@@ -41,6 +45,7 @@ class Comment
 
     public function __construct()
     {
+        $this->createdAt = new \DateTimeImmutable();
         $this->votes = new ArrayCollection();
     }
 

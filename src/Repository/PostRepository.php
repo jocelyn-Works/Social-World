@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Post;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Post>
@@ -21,14 +22,18 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function findPosteWithUsers() {  // 
+    public function findPosteWithUsers() {
         return $this->createQueryBuilder('p')
-                    ->leftJoin('p.author', 'a')
-                    ->addSelect('a')
-                    ->orderBy('p.createdAt', 'DESC')
-                    ->getQuery()
-                    ->getResult();
+            ->leftJoin('p.author', 'a')
+            ->where('p.status = :status')
+            ->setParameter('status', 'public')  
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
+
+    
+    
 
     public function findPosteWithCommentsAndUsers(int $id) {
         return $this->createQueryBuilder('p')
@@ -45,6 +50,19 @@ class PostRepository extends ServiceEntityRepository
                     ->getOneOrNullResult();
 
     }
+
+    // récuperer tous les post public et les post inscrit sur leur profil = en private
+    public function findPostsOffUser(User $author) {
+        return $this->createQueryBuilder('p')
+            ->where('(p.author = :author AND p.status = :publicStatus) OR p.receiver = :authorId')
+            ->setParameter('author', $author)
+            ->setParameter('publicStatus', 'public')
+            ->setParameter('authorId', $author->getId())
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 //    /**
 //     * @return Post[] Returns an array of Post objects

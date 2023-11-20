@@ -1,0 +1,372 @@
+
+
+// ----------  mobile  ----------  //
+@media screen and (min-width: 320px) and (max-width: 425px) {
+      
+    .signup{
+      
+      .header-title{
+          
+          
+          
+          & span{
+          display: none;
+          }
+         
+          
+          .social-lobster{
+              position: absolute;
+              top: 30px;
+              left: -80px;
+              width:100%;
+              height: 10vh;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              p{
+                  color: $primary;
+                  font-size: 4rem;
+                  font-weight: 900;
+                  font-family: $lobster;
+                  text-shadow: 3px 3px 3px black;
+
+              }
+              
+             
+          }
+      }
+      .social-world{
+          
+          margin-top: 4vh;
+          .img-socialworld{
+              display: none;
+          }
+          .form-socialworld  {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              
+              h2 {
+                font-size: xx-large;
+                margin-bottom: 20px;
+              }
+            
+              form {
+                display: flex;
+                flex-direction: column;
+                
+                input{
+                  width: 15rem;
+                }
+            
+                label {
+                  font-weight: bold;
+                  margin-bottom: 8px;
+                  
+                }
+            
+                .row-signup{
+                  width: 100%;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-evenly;
+                  
+                }
+                a {
+                  margin-top: 16px;
+                  text-decoration: none;
+                  color: $primary;
+                  font-weight: bold;
+            
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                  
+                }
+              }
+              .messageFlashe{
+                width: 100%;
+                height: 3vh;
+                color: rgb(6, 90, 6);
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+  
+              }
+            }
+            .form-connexion{
+              width: 50%;
+              display: flex;
+              flex-direction: column;
+              margin-top: 8vh;
+              margin-bottom: 6vh;
+              margin-left: 5rem;
+          
+              a {
+                  text-decoration: none;
+                  color: $primary;
+                  font-weight: bold;
+            
+                  &:hover {
+                    text-decoration: underline 2px;
+                  }
+                  
+                }
+                      h2 {
+                          font-size: xx-large;
+                          margin-bottom: 20px;
+                        }
+          
+                      form {
+                          display: flex;
+                          flex-direction: column;
+                          align-items: flex-start;
+                          label {
+                              display: block;
+                              letter-spacing: 2px;
+                              font-family: $lobster;
+                              font-size: x-large;
+                              font-weight: bold;
+                              color: $primary;
+                              text-shadow: 1px 0px 0px black;
+                              margin-bottom: 5px;
+                          }
+                          & input{
+                              width: 15rem;
+                              
+                              &:focus{
+                                  border: 3px solid $primary; 
+                                }
+                          }
+                          
+                      } 
+                      .remember-me{
+                          margin: 2vh 0;
+                      } 
+              .row-connexion{
+                  width: 115%;
+                  height: 7vh;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  margin-top: 2vh;
+              }        
+          
+          }
+              
+
+      }
+  }
+  
+  
+  footer{
+      width: 100%;
+      height: 8vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      // align-items: center;
+      background-color: $primary;
+      color: $white;
+      text-shadow: 3px 3px 3px black;
+      margin-top: 9vh;
+      
+      
+      span{
+       margin-right: 40px;
+        font-family: $lobster;
+        font-size: xx-large;
+      }
+      p{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 50px;
+        font-size:medium;
+
+          
+    }
+  }
+
+  .row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+.footer-change-pwd{
+      width: 100%;
+      height: 8.1vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size:medium;
+      background-color: $primary;
+      color: $white;
+      text-shadow: 3px 3px 3px black;
+      margin-top: 36vh;
+      span{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        font-family: $lobster;
+        font-size: xx-large;
+      }
+        p{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+          
+    }
+
+}
+}
+
+//  -----------  tablette ----------  //
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  // *{
+  //       box-shadow: 0 0 0 3px red inset;
+  //       margin: 0;
+  //       padding: 0;
+  //       }
+  //       *, 
+  //       ::before
+  //       ::after{
+  //           box-sizing: border-box;
+  //           margin: 0;
+  //           padding: 0;
+  //       }
+  .signup{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .header-title{
+        width: 100%;
+        height: 8vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10vh;
+        // margin-left: 10px;
+        
+        & span{
+          color: rgba(53, 53, 53, 0.402);
+          text-shadow: // ombre 
+        -1px -1px 0 $primary,  // ombre situé en haut a gauche
+         4px -1px 0 $primary,  // ombre en haut a droite 
+        -1px 1px 0 $primary,   // ombre en bas a gauche 
+         4px 1px 0 $primary;   // ombre en bas a droite 
+          font-size: 2rem;
+          font-weight: 800;
+          animation:  show-letter 0.2s ease-in-out forwards;
+          opacity: 0;
+        }
+       
+        
+        .social-lobster{
+            color: $primary;
+            font-size: 3rem;
+            font-weight: 900;
+            font-family: $lobster;
+            text-shadow: 3px 3px 3px black;
+            margin-left: 0.5rem;
+            margin-right: 10px;
+           
+        }
+    }
+  }
+  .social-world{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 4vh;
+    .img-socialworld{
+        width: 50%;
+        height: 71vh;
+        padding: 20px;
+        // margin-left: -120rem;
+        & img{
+            position: absolute;
+        }
+        .phone img{
+            position: absolute;
+            top: ≤7vh;
+            left: 16rem;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.8s;
+        }
+        .phone img.active{
+            opacity: 1;
+        }
+        
+    }
+    .form-socialworld {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 4vh;
+        margin-left: 5rem;
+        
+        h2 {
+          font-size: xx-large;
+          margin-bottom: 20px;
+        }
+      
+        form {
+          display: flex;
+          flex-direction: column;
+          input{
+            width: 20rem;
+          }
+      
+          label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            align-content: flex-start;
+          }
+          .btn {
+            max-width: 30%;
+          }
+      
+          .row-signup{
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            
+          }
+          a {
+            margin-top: 16px;
+            text-decoration: none;
+            color: $primary;
+            font-weight: bold;
+      
+            &:hover {
+              text-decoration: underline;
+            }
+            
+          }
+        }
+        .messageFlashe{
+          
+          width: 100%;
+          height: 3vh;
+          margin-top: 2vh;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          color: $primary
+          
+
+        }
+      }
+}
+}
+

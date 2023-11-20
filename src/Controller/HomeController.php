@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
-use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\PostRepository;
-use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
+use App\Service\UploaderPostPicture;
+use App\Repository\FriendshipRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,23 +19,37 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/post', name: 'home')]
+    #[Route('/post', name: 'post')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function index( Request $request, EntityManagerInterface $em, PostRepository $repository): Response
+    public function index( Request $request, EntityManagerInterface $em,
+    PostRepository $repository, UserRepository $userRepository,
+    UploaderPostPicture $uploaderPostPicture,
+    FriendshipRepository $friendshipRepository): Response
     {
 
-        $user = $this->getUser();
+        $currentUser = $this->getUser();
+        
 
         $newPost = new Post();  // crée un nouveau post
         $postForm = $this->createForm(PostType::class, $newPost);  // création du formulaire
         $postForm->handleRequest($request);  // analyse et verifie la requete de mon formulaire
 
         if ($postForm->isSubmitted() && $postForm->isValid()) { // verifie que mon formulaire est soummi et valid
+
+            $picture = $postForm->get('picture')->getData();
+            
+            if ($picture) {
+                $uploadedPicturePath = $uploaderPostPicture->uploadPostImage($picture);
+                $newPost->setPicture($uploadedPicturePath);
+
+            }
+
             // les attributs qui ne sont pas dans notre formulaire
             $newPost->setRating(0)  // les likes sont mit a 0 lors de la crétion 
                     ->setNbresonse(0)  // le nonbre de reponse est mit a O lors de la création 
-                    ->setAuthor($user)  // defini l'autheur du post
-                    ->setCreatedAt(new DateTimeImmutable());  // la date de crétion 
+                    ->setAuthor($currentUser)  // defini l'autheur du post
+                    ->setStatus(Post::STATUS_PUBLIC); 
+                    
 
             // $em = gestion des entités et de la communication avec la base de données
             $em->persist($newPost);  // preparation de l'entity à entrer en basse de donné
@@ -46,22 +61,53 @@ class HomeController extends AbstractController
 
         $posts = $repository->findPosteWithUsers();  // récuperer tous les post en basse de donné 1 requéte
 
-        return $this->render('home/index.html.twig', [
+        $addFriends = $userRepository->findUserNoConnectedWithRequestsPending($currentUser);  // 
+
+        $fiends = $friendshipRepository->findAcceptedFriendships($currentUser);  // les demande accepter 
+        
+        $friendShips = $friendshipRepository->findAddUsers($currentUser);  //  les demande d'ami
+
+        $iffriendship = count($friendShips) >0; // pour savoir si il y a une notificatication 
+        
+
+        return $this->render('home/post.html.twig', [
             'postForm' => $postForm->createView(),  // pour l'appelle de mon formulaire
             'posts' => $posts,        // pour afficher mes posts
-            'user' => $user
+            'user' => $currentUser,  // utilisateur connecter 
+            'addfriends' => $addFriends,     // tous les utilisateurs
+            'friendships' => $friendShips,  // notifications 
+            'iffriendship' => $iffriendship,   // si il y a une notification 
+            'friends' => $fiends, // liste des amis
             
         ]);
     }
 
-    #[Route('/post/{id}', name: 'post_show')]
+    #[Route('/post/comment/{id}', name: 'post_show')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function show(Post $post, Request $request, EntityManagerInterface $em): Response
+    public function show(int $id, Post $post, PostRepository $postRepository,
+    Request $request, EntityManagerInterface $em, UserRepository $userRepository,
+    FriendshipRepository $friendshipRepository): Response
     {
+        $user = $this->getUser();
+
+        $post = $postRepository->findPosteWithCommentsAndUsers($id);
+        $users = $userRepository->findAll();
+        $friendShips = $friendshipRepository->findAddUsers($user);
+        $iffriendship = count($friendShips) >0;
+        $addFriends = $userRepository->findUserNoConnectedWithRequestsPending($user);
+        $fiends = $friendshipRepository->findAcceptedFriendships($user);
+
+
+
         $options = [
             'post' =>$post,
+            'users' => $users,
+            'friendships' => $friendShips,
+            'addfriends' => $addFriends,
+            'iffriendship' => $iffriendship,
+            'friends' => $fiends, // liste des amis
+
         ];
-        $user = $this->getUser();
 
         if($user){
             $comment = new Comment();
@@ -69,8 +115,7 @@ class HomeController extends AbstractController
             $commentForm->handleRequest($request);
 
             if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-                $comment->setCreatedAt(new DateTimeImmutable())
-                        ->setRating(0)
+                $comment->setRating(0)
                         ->setAuthor($user)
                         ->setPost($post);
 
@@ -84,9 +129,11 @@ class HomeController extends AbstractController
 
             }
             $options['form'] = $commentForm->createView();
+         
         }
         
-
-        return $this->render('home/show.html.twig', $options );
+        return $this->render('home/comment.html.twig', $options );
     }
+    
+   
 }

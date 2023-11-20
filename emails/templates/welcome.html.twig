@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+    <body>
+        {% apply inline_css(source('@email_css/email.css')) %}
+            <h1>Social World</h1>
+            <h2>Bienvenue {{ username }} sur Social World </h2>
+            <h2>Connectons le Monde Ensemble !</h2>
+            <p>Vous pouvez dès à présent explorer toutes les fonctionnalités passionnantes que nous offrons sur Social World</p>
+            <a href="{{ url('login') }}">Connectez vous</a>
+        {% endapply %}
+    </body>
+</html>

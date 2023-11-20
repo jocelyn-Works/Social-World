@@ -1,114 +1,441 @@
 // ---------- left bar ----------- //
-.left-bar{
-    width: 20%;
-    height: 100vh;
+.left-bar {
+  width: 20%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem;
+  background-color: $white;
+  @extend.border-body;
+  .title{
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
-    border-right: 2px solid $primary;
-    .logo{
-        width: 100%;
-        height: 30vh;
+    border: 3px solid $gray;
+    background-color: $gray-light;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    h2 {
+     margin: 2vh 0;
+     width: 50%;
+     color: $white;
+     text-shadow: 
+                        -1px -1px 0 black,  
+                         0.5px -1px 0 black,
+                        -1px 1px 0 black,
+                         0.5px 1px 0 black;
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+   }
+   i{
+    color: $gray;
+   }
+   .has-notifications {
+    color: $primary;
+    animation: bell-move 0.5s infinite; 
+}
+
+@keyframes bell-move {
+  0%, 100% {
+      transform:  rotate(-40deg); 
+  }
+  50% {
+      transform:  rotate(40deg); 
+  }
+}
+  }
+  .notification {
+    width: 100%;
+    img{
+      margin-top: 3vh;
+      width: 100%;
+      height: 300px;
+    }
+    .scroll-add {
+      width: 100%;
+      overflow-y: scroll;
+      h3 {
+        font-family: $lobster;
+        letter-spacing: 2px;
+        color: $primary;
+        text-transform: capitalize;
+
+        text-shadow: 
+                        -1px -1px 0 black,  
+                         0.5px -1px 0 black,
+                        -1px 1px 0 black,
+                         0.5px 1px 0 black;
+        margin: 2VH 0;
+        display: flex;
         flex-direction: row;
         justify-content: center;
-        img{
-            width: 400px;
-            height:400px;
-            margin: 2vh 25%;
+      }
+
+      /* Préfixes WebKit pour la propriété overflow-y */
+    &::-webkit-scrollbar {
+      // largeur de la barre
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      // barre de defilement
+      background-color: $gray;
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: $primary;
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      //arriére de la barre de defilement
+      background-color: $gray-light;
+      border-radius: 5px;
+    }
+
+      .addFriends {
+        width: 95%;
+        display: flex;
+        margin: 1vh 1vh;
+        flex-direction: row;
+        justify-content: center;
+        border: 3px solid $gray;
+        background-color: $gray-light;
+        border-radius: 20px;
+        & img {
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
         }
+
+        .friendsList {
+          width: 50%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+
+        .info-friendship {
+          width: 30%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          
+          img {
+            margin: 2vh 0;
+            align-items: center;
+            border-radius: 50%;
+            border: 1px solid $primary;
+          }
+        }
+        .info-User {
+          width: 70%;
+          display: flex;
+          flex-direction: column;
+          // margin: 1vh 0;
+          & h3 {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
+          .btn-friendship {
+            width: 100%;
+            height: 4vh;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            .add-primary {
+              color: $primary;
+            }
+            .refused-gray {
+              color: $gray;
+            }
+            .blocked-red {
+              color: $danger;
+            }
+          }
+        }
+      }
     }
-    .left-nav{
-        color: $primary;
-        margin-top: 5vh;
-        line-height: 8vh;
-        font-size: $size;
-    }
+  }
 }
 
 // ----------  right  bar  -------- //
-.right{
-    width: 20%;
-    height: 100vh;
+.right {
+  width: 20%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem;
+  background-color: $white;
+  @extend.border-body;
+  .title {
+    // width: 80%;
+    height: 7vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    border-left: 2px solid $primary;
-    .search-bar {
+    width: 100%;
+    border: 3px solid $gray;
+    background-color: $gray-light;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    h2{
+      margin: 2vh 0;
+     width: 100%;
+     color: $white;
+     text-shadow: 
+                        -1px -1px 0 black,  
+                         0.5px -1px 0 black,
+                        -1px 1px 0 black,
+                         0.5px 1px 0 black;
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+    }
+    i{
+      color: $gray;
+      margin-right:10px ;
+      &:hover{
+        color: $primary;
+        cursor: pointer;
+      }
+    }
+  }
+  .scroll-add {
+    width: 100%;
+    height: 60vh;
+    margin: 1vh 0;
+    overflow-y: scroll;
+
+    /* Préfixes WebKit pour la propriété overflow-y */
+    &::-webkit-scrollbar {
+      // largeur de la barre
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      // barre de defilement
+      background-color: $gray;
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: $primary;
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      //arriére de la barre de defilement
+      background-color: $gray-light;
+      border-radius: 5px;
+    }
+    .search-bar{
+      width: 100%;
+      height: 3vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin:1vh 0;
+      input{
+        width: 80%;
+        height: 4vh;
+        font-size: large;
+        padding: 10px;
+        border-radius: 15px;
+        border: 4px solid $primary;
+        &::placeholder{
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .add-freinds {
+      width: 90%;
+      height: 58vh;
+      margin-left: 2vh;
+      .row-user {
         width: 100%;
-        
         display: flex;
-        justify-content: center;
+        flex-direction: row;
+
         align-items: center;
-        margin: 4vh 0;
-      
-        .search-box {
-          width: fit-content;
-          height: fit-content;
-          position: relative;
-          & i {
-            color: white;
+        margin: 2vh 0;
+        border: 3px solid $gray;
+        background-color: $gray-light;
+        border-radius: 25px;
+        img {
+          width: 20%;
+          width: 50px;
+          height: 50px;
+          margin: 0.5vh 0;
+          border-radius: 50%;
+          margin-left: 1rem;
+        }
+        .row {
+          width: 60%;
+          display: flex;
+          flex-direction: row;
+        }
+        .addUserIcone {
+          width: 42px;
+          height: 42px;
+          display: flex;
+          align-items: center;
+          border: 3px solid $primary;
+          background-color: $gray-light;
+          color: $white;
+          border-radius: 50%;
+          padding: 0.5vh;
+          margin-right: 1rem;
+          i{
+            color: $gray;
+          
           }
-      
-          .input-search {
-            height: 50px;
-            width: 40px;
-            border-style: none;
-            padding: 10px;
-            font-size: 18px;
-            letter-spacing: 2px;
-            outline: none;
-            border-radius: 25px;
-            transition: all 0.5s ease-in-out;
-            background-color: $primary;
-            padding-right: 40px;
-            color: #000000;
-      
-            &::placeholder {
-              color: rgba(10, 9, 9, 0.5);
-              font-size: 18px;
-              letter-spacing: 2px;
-              font-weight: 100;
-            }
-          }
-      
-          .btn-search {
-            width: 50px;
-            height: 50px;
-            border-style: none;
-            font-size: 20px;
-            font-weight: bold;
-            outline: none;
-            cursor: pointer;
-            border-radius: 50%;
-            position: absolute;
-            right: 0px;
-            color: #000000;
-            background-color: transparent;
-            pointer-events: painted;
-      
-            &:focus ~ .input-search {
-              width: 300px;
-              border-radius: 0px;
-              background-color: transparent;
-              border-bottom: 2px solid $primary;
-              transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
-            }
-          }
-      
-          .input-search:focus {
-            width: 300px;
-            border-radius: 0px;
-            background-color: transparent;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-            transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+          i:hover{
+              color: $primary;
           }
         }
       }
-      .right-bar {
-        display: flex; 
-        align-items: center;
-        margin-top: 4vh; 
-      }
+    }
+  }
 }
 
+// ---- friendslist  //
+.right-friends {
+  width: 20%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem;
+  background-color: $white;
+  @extend.border-body;
+  .title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid $gray;
+  background-color: $gray-light;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  i{
+    color: $gray;
+    margin-left:10px ;
+    &:hover{
+      color: $primary;
+      cursor: pointer;
+    }
+  }
+  h2{
+    // width: 50%;
+    margin: 2vh 0;
+    width: 100%;
+    color: $white;
+    text-shadow: 
+              -1px -1px 0 black,  
+              0.5px -1px 0 black,
+              -1px 1px 0 black,
+              0.5px 1px 0 black;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+  }
+  
+  }
+  .notification {
+    width: 100%;
+    margin: 1vh 0;
+    & h2 {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .scroll-add {
+      width: 100%;
+      height: 60vh;
+      overflow-y: scroll;
+
+      /* Préfixes WebKit pour la propriété overflow-y */
+      &::-webkit-scrollbar {
+        // largeur de la barre
+        width: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        // barre de defilement
+        background-color: $gray;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: $primary;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        //arriére de la barre de defilement
+        background-color: $gray-light;
+        border-radius: 5px;
+      }
+
+      .addFriends {
+        
+          width: 90%;
+          display: flex;
+          margin: 1vh 5%;
+          flex-direction:row;
+          
+          align-items: center;
+          border: 3px solid $gray;
+          background-color: $gray-light;
+          border-radius: 20px;
+          .column{
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .row{
+             margin-top: 1vh;
+              .refused-gray {
+                color: $gray;
+                &:hover{
+                  color: $primary;
+
+                }
+              }
+              .blocked-red {
+                color: $gray;
+                &:hover{
+                   color: $danger;
+                }
+              }
+            }
+          }
+          
+          & img {
+            margin: 0.5vh 0.5rem;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+          }
+          h3{
+            margin: 0 0.5rem;
+          }
+        }
+      }
+    }
+  }
 

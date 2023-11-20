@@ -6,6 +6,8 @@
 parameters:
     profile.folder: '%kernel.project_dir%/public/profiles'
     profile.folder.public: 'profiles'
+    post.folder: '%kernel.project_dir%/public/postImg'
+    post.folder.public: 'postImg'
 
 services:
     # default configuration for services in *this* file
@@ -29,6 +31,13 @@ services:
             $profileFolder: '%profile.folder%'
             $profileFolderPublic: '%profile.folder.public%'
 
+
+    App\Service\UploaderPostPicture:
+        arguments:
+            $postFolder: '%post.folder%'
+            $postFolderPublic: '%post.folder.public%'        
+
     App\Controller\SecurityController:
         arguments:
             $formLoginAuthenticator: '@security.authenticator.form_login.main'
+  

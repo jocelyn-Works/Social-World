@@ -3,8 +3,104 @@
 {% block title %}Social World{% endblock %}
 
 {% block body %}
-{% include "partials/_leftbar.html.twig" %}
+{% include "partials/_navBar.html.twig" %}
+<div class="row">
+{% include "partials/_notification.html.twig" %}
 
 
-{% include "partials/_rightbar.html.twig" %}
+<div class="content-boby">
+
+    <div class="post-user-info">
+        <div class="img-post-user">
+            <img src="{{ asset(user.picture)}}"class="">
+        </div>
+          <div class="row-info-user">
+                <h3>@ {{user.fullname}}</h3>
+        {% if userFriendshipStatus == 'accepted' %}
+            <p>Ami(e)</p>
+            <a href="{{path('remove-friend', {'id': user.id}) }}" class="refused-gray"><i class="fa-regular fa-circle-xmark fa-xl"></i></a>
+            <a href="{{path('block-user', {'id': user.id}) }}" class="blocked-red"><i class="fa-solid fa-lock fa-xl"></i></a>
+        {% elseif userFriendshipStatus == 'pending' %}
+            <p>Demande en attente</p>
+        {% else %}
+            <a href="{{ path('add-friend', {'id': user.id} )}}">
+                <i class="fa-solid fa-user-plus fa-2xl"></i>
+            </a>
+        {% endif %}
+        </div>    
+    </div>
+    
+    {% if userFriendshipStatus == 'accepted' %}
+    
+    <div class="post">
+        
+        <div class="post-content">
+            <div class="img-post">
+                <a href="{{path('current_user')}}">
+                    <img src="{{asset(app.user.picture) }}" class="avatar-post">
+                </a> 
+            </div>  
+             
+        {{ form_start(postForm) }}
+        {{ form_row(postForm.picture, { 'attr': {'style': 'display: none;'} }) }}
+        {{ form_row(postForm.content, { 'attr': {'placeholder' : 'Écrivez quelque chose à '~ user.firstname } }) }}
+                {{form_rest(postForm)}}
+                <div class="envoyer-post">
+                        <i id="upload-icon" class="fa-regular fa-image fa-2xl" style="cursor: pointer;"></i>
+                        <button class="btn btn-primary">Envoyer</button>  
+                </div>
+        {{ form_end(postForm) }}
+        </div>
+    </div>
+    <script>
+        document.getElementById('upload-icon').addEventListener('click', function() {
+            document.getElementById('{{ postForm.picture.vars.id }}').click();
+        });
+    </script>
+{# --------   post show ------------ #}
+<div class="scroll-user">
+    <ul>
+        {% for post in posts %}
+        <div class="post-show">
+            <div class="img-avatar">
+                <a href="{{path('user', {id: post.author.id}) }}">
+                    <img src="{{ asset(post.author.picture)}}" alt="" class="avatar" >
+                </div>
+                <div class="post-show-content">
+                    <div class="post-info-user">
+                        <h3>@ {{post.author.fullname}}</h3>
+                    </a>
+                        <small class="justify-content-end mr-10 ">{{post.createdAt | ago(locale= 'fr')}}</small>
+                    </div>
+                <div class="post-user-content">
+                    <p>{{ post.content }}</p>
+                    {% if post.picture %}
+                        <div class="postimage">
+                            <img src="{{ asset(post.picture) }}" class="avatar-post">
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="post-user-icone">
+                    <div class="row-icone">
+                        <div class="comment-icone">
+                            <a href="{{path('post_show', {id:post.id})}}">
+                                <i class="fa-regular fa-comment fa-lg"></i>
+                            </a>
+                        </div>
+                        <p>{{post.nbresonse}}</p>
+                        
+                        {% include "partials/_rating.html.twig" with{rating: post.rating, from: 'post', id: post.id} %}
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+</div>
+{% include "partials/_friendslist.html.twig" %}
+</div>
 {% endblock %}

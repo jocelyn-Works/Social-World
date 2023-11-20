@@ -3,14 +3,13 @@
 {% block title %}Social project{% endblock %}
 
 {% block body %}
-{% include "partials/_leftbar.html.twig" %}
+{% include "partials/_navBar.html.twig" %}
+<div class="row">
+{% include "partials/_notification.html.twig" %}
 
 <div class="content-boby">
 
     <div class="post">
-        <div class="post-title">
-            <h1>Accueil</h1>
-        </div>
         <div class="post-content">
             <div class="img-post">
                 <a href="{{path('current_user')}}">
@@ -18,15 +17,22 @@
                 </a> 
             </div>  
              
-        {{ form_start(postForm) }}
-                {{form_rest(postForm)}}
+            {{ form_start(postForm) }}
+            {{ form_row(postForm.picture, { 'attr': {'style': 'display: none;'} }) }}
+            {{form_rest(postForm)}}
                 <div class="envoyer-post">
-                <button class="btn btn-primary  ">Envoyer</button>
+                    <i id="upload-icon" class="fa-regular fa-image fa-2xl" ></i>
+                    <button class="btn btn-primary">Envoyer</button>
                 </div>
-        {{ form_end(postForm) }}
+            {{ form_end(postForm) }}
         </div>
     </div>
-    <div class="stop-post"></div>
+    <script>
+        document.getElementById('upload-icon').addEventListener('click', function() {
+            document.getElementById('{{ postForm.picture.vars.id }}').click();
+        });
+    </script>
+    
 
     {# --------   post show ------------ #}
     <div class="scroll">
@@ -35,16 +41,21 @@
             <div class="post-show">
                 <div class="img-avatar">
                     <a href="{{path('user', {id: post.author.id}) }}">
-                        <img src="{{ asset(post.author.picture)}}" alt="" class="avatar" >
+                    <img src="{{ asset(post.author.picture)}}" alt="" class="avatar" >
+                </div>
+                <div class="post-show-content">
+                    <div class="post-info-user">
+                        <h3>@ {{post.author.fullname}}</h3>
+                    </a>
+                        <small class="justify-content-end mr-10 ">{{post.createdAt | ago(locale= 'fr')}}</small>
                     </div>
-                    <div class="post-show-content">
-                        <div class="post-info-user">
-                            <h3>@ {{post.author.fullname}}</h3>
-                        </a>
-                            <small class="justify-content-end mr-10 ">{{post.createdAt | ago(locale= 'fr')}}</small>
-                        </div>
                     <div class="post-user-content">
                         <p>{{ post.content }}</p>
+                        {% if post.picture %}
+                        <div class="postimage">
+                            <img src="{{ asset(post.picture) }}" >
+                        </div>
+                    {% endif %}
                     </div>
                     <div class="post-user-icone">
                         <div class="row-icone">
@@ -56,8 +67,7 @@
                             <p>{{post.nbresonse}}</p>
                             
                             {% include "partials/_rating.html.twig" with{rating: post.rating, from: 'post', id: post.id} %}
-                        </div>
-                            
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -65,6 +75,7 @@
         </ul>
     </div>
 </div>
-{% include "partials/_rightbar.html.twig" %}
+{% include "partials/_friendslist.html.twig" %}
+</div>
 
 {% endblock %}

@@ -34,6 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z0-9!@#$%^&*(),.?:{}|]*$/',
+        message: 'Le champ peut contenir des lettres majuscules, minuscules, chiffres et certains symboles.'
+    )] 
     #[Assert\NotBlank(message: "Veuillez renseigner un mot de passe.")]
     #[Assert\Length(min: 5, minMessage:" Le mot de passe doit faire plus de 5 caracteres.")]
     private ?string $password = null;
@@ -66,12 +70,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Vote::class, orphanRemoval: true)]
     private Collection $votes;
 
+    #[ORM\OneToMany(mappedBy: 'requester', targetEntity: Friendship::class)]
+    private Collection $friendships;
+
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Friendship::class)]
+    private Collection $receiverFreindShips;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
+        $this->createdAt = new \DateTimeImmutable();
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->friendships = new ArrayCollection();
+        $this->receiverFreindShips = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -292,6 +305,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($vote->getAuthor() === $this) {
                 $vote->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friendship>
+     */
+    public function getFriendships(): Collection
+    {
+        return $this->friendships;
+    }
+
+    public function addFriendship(Friendship $friendship): static
+    {
+        if (!$this->friendships->contains($friendship)) {
+            $this->friendships->add($friendship);
+            $friendship->setRequester($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendship(Friendship $friendship): static
+    {
+        if ($this->friendships->removeElement($friendship)) {
+            // set the owning side to null (unless already changed)
+            if ($friendship->getRequester() === $this) {
+                $friendship->setRequester(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friendship>
+     */
+    public function getReceiverFreindShips(): Collection
+    {
+        return $this->receiverFreindShips;
+    }
+
+    public function addReceiverFreindShip(Friendship $receiverFreindShip): static
+    {
+        if (!$this->receiverFreindShips->contains($receiverFreindShip)) {
+            $this->receiverFreindShips->add($receiverFreindShip);
+            $receiverFreindShip->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceiverFreindShip(Friendship $receiverFreindShip): static
+    {
+        if ($this->receiverFreindShips->removeElement($receiverFreindShip)) {
+            // set the owning side to null (unless already changed)
+            if ($receiverFreindShip->getReceiver() === $this) {
+                $receiverFreindShip->setReceiver(null);
             }
         }
 

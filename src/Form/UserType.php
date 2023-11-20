@@ -9,9 +9,10 @@ use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+       class UserType extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -24,7 +25,7 @@ class UserType extends AbstractType
             ->add('firstname',TextType::class,[
                 'label' => 'Prénom :'
             ])
-            ->add('email',TextType::class,[
+            ->add('email',EmailType::class,[
                 'label' => 'Email :'
             ])
             
@@ -46,8 +47,10 @@ class UserType extends AbstractType
                     ]
                 ])
             ->add('password',  PasswordType::class,[
-                'label' => 'Mot de Passe :'
-                ])
+                'label' => 'Mot de Passe :',
+               
+            ]);
+            
                 // ->add('roles')
         ;
     }

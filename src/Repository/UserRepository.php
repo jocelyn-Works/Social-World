@@ -3,11 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Friendship;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -21,9 +23,12 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+        
     }
 
     /**
@@ -39,6 +44,32 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+
+    public function findUserNoConnectedWithRequestsPending($currentUserId)
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.receiverFreindShips', 'fr', 'WITH', 'fr.requester = :currentUserId')
+            ->leftJoin('u.friendships', 'fs', 'WITH', 'fs.receiver = :currentUserId')
+            ->where('u.id != :id')
+            ->andWhere('fr.id IS NULL OR fr.status NOT IN (:statuses)')
+            ->andWhere('fs.id IS NULL OR fs.status NOT IN (:statuses)')
+            ->setParameter('id', $currentUserId)
+            ->setParameter('currentUserId', $currentUserId)
+            ->setParameter('statuses', [Friendship::STATUS_ACCEPTED, Friendship::STATUS_BLOCKED, Friendship::STATUS_PENDING])
+            ->getQuery()
+            ->getResult();
+    }
+    
+   
+    // public function findUserNoConnected($users) {  // 
+    //         return $this->createQueryBuilder('u')
+    //                     ->where('u.id != :id')
+    //                     ->setParameter('id', $users)
+    //                     ->getQuery()
+    //                     ->getResult();
+    // }
+    
+       
 
 //    /**
 //     * @return User[] Returns an array of User objects

@@ -1,0 +1,95 @@
+.nav-bar{
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1vh 0;
+    
+    .logo{
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        
+        h1{
+            color: $primary;
+            font-family: $lobster;
+            letter-spacing: 4px;
+            font-size: 4rem;
+            font-weight: 900;
+            text-shadow: 
+                        -1px -1px 0 black,  
+                         3px -1px 0 black,
+                        -1px 1px 0 black,
+                         3px 1px 0 black;
+        }
+    }
+    .menu{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        a {
+            i{
+                color: $gray;
+                transition: color 0.3s ease;
+            }
+            &.active{
+                i{
+                    color: $primary;
+                }
+            }
+            
+        }
+        h2{
+            text-transform: capitalize;
+            font-family: $lobster;
+            color: $primary;
+            letter-spacing: 2px;
+            font-size: 3rem;
+            text-shadow: 
+                        -1px -1px 0 black,  
+                         0.5px -1px 0 black,
+                        -1px 1px 0 black,
+                         0.5px 1px 0 black;
+            
+        }
+       
+        
+    }
+
+    .settings-menu {
+        display: none;
+        position: absolute;
+        top: 9vh;
+        left: 60rem;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        ul {
+            list-style: none;
+            padding: 0;
+            li {
+                a {
+                    display: block;
+                    color: #333;
+                    text-decoration: none;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+
+                    &:hover {
+                        background-color: #f1f1f1;
+                    }
+                }
+            }
+        }
+    }
+
+  
+ 
+.deconnexion{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+}

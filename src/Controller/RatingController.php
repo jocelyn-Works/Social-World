@@ -17,7 +17,8 @@ class RatingController extends AbstractController
 {
     #[Route('/post/rating/{id}/{score}', name: 'post_rating')]
     #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
-    public function ratepost(Request $request, Post $post, VoteRepository $voteRepository, int $score, EntityManagerInterface $em): Response
+    public function ratepost(Request $request, Post $post, VoteRepository $voteRepository,
+     int $score, EntityManagerInterface $em): Response
     {   
         $user = $this->getUser();
         // verifie que lutilisateurs est pas propriétaire du post
@@ -30,7 +31,7 @@ class RatingController extends AbstractController
 
             if ($vote) {
         // s'il avait aimer la question et qu'il reclique sur la fleche du haut c'est pour enlever son vote
-        // s'il n'avait pas aimer et qu'il reclique sur la fleche du basc'est pour enlever son vote
+        // s'il n'avait pas aimer et qu'il reclique sur la fleche du bas c'est pour enlever son vote
                 if (($vote->isIsLiked() && $score > 0 || (!$vote->isIsLiked() && $score < 0 ))){
                     // on suprime le vote
                     $em->remove($vote);
@@ -55,7 +56,7 @@ class RatingController extends AbstractController
         }
         // rediriger l'utilisateur d'ou il vient
         $referer = $request->server->get('HTTP_REFERER');
-        return $referer ? $this->redirect($referer) : $this->redirect(('home'));
+        return $referer ? $this->redirect($referer) : $this->redirect(('post'));
     }
 
     #[Route('/comment/rating/{id}/{score}', name: 'comment_rating')]
@@ -98,6 +99,6 @@ class RatingController extends AbstractController
         }
         // rediriger l'utilisateur d'ou il vient
         $referer = $request->server->get('HTTP_REFERER');
-        return $referer ? $this->redirect($referer) : $this->redirect(('home'));
+        return $referer ? $this->redirect($referer) : $this->redirect(('post'));
     }
 }

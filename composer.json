@@ -18,6 +18,8 @@
         "symfony/flex": "^2",
         "symfony/form": "6.3.*",
         "symfony/framework-bundle": "6.3.*",
+        "symfony/lock": "6.3.*",
+        "symfony/mailer": "6.3.*",
         "symfony/maker-bundle": "^1.51",
         "symfony/mime": "6.3.*",
         "symfony/rate-limiter": "6.3.*",
@@ -27,6 +29,7 @@
         "symfony/validator": "6.3.*",
         "symfony/webpack-encore-bundle": "^2.0",
         "symfony/yaml": "6.3.*",
+        "twig/cssinliner-extra": "^3.7",
         "twig/extra-bundle": "^3.7",
         "twig/intl-extra": "^3.7",
         "twig/twig": "^2.12|^3.0"

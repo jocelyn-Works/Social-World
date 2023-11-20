@@ -1,0 +1,109 @@
+
+
+<div class="right-friends" id="friendsDiv" style="display: none;">
+    <div class="title">
+        <i id="friendsIcon" class="fa-solid fa-angles-left fa-2xl"></i><h2>Mes amis</h2>
+    </div>
+    <div class="notification">
+        <div class="scroll-add">
+            <ul>
+                {% for friend in friends %}
+                    <div class="addFriends">
+                        {% if friend.requester.id == app.user.id %}
+                            <a href="{{ path('user', {id: friend.receiver.id}) }}">
+                                <img src="{{ asset(friend.receiver.picture) }}" alt="">
+                            </a>
+                            <div class="column">
+                                <h3>@{{ friend.receiver.fullname }}</h3>
+                                <div class="row">
+                                    <a href="{{ path('remove-friend', {'id': friend.receiver.id}) }}" class="refused-gray"><i class="fa-regular fa-circle-xmark fa-xl"></i></a>
+                                    <a href="{{ path('block-user', {'id': friend.receiver.id}) }}" class="blocked-red"><i class="fa-solid fa-lock fa-xl"></i></a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <a href="{{ path('user', {id: friend.requester.id}) }}">
+                                <img src="{{ asset(friend.requester.picture) }}" alt="">
+                            </a>
+                            <div class="column">
+                                <h3>@{{ friend.requester.fullname }}</h3>
+                                <div class="row">
+                                    <a href="{{ path('remove-friend', {'id': friend.requester.id}) }}" class="refused-gray"><i class="fa-regular fa-circle-xmark fa-xl"></i></a>
+                                    <a href="{{ path('block-user', {'id': friend.requester.id}) }}" class="blocked-red"><i class="fa-solid fa-lock fa-xl"></i></a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="right" id="addFriendsDiv" >
+    <div class="title">
+        <h2>Ajoute des Ami(e)s</h2><i id="addFriendsIcon" class="fa-solid fa-angles-right fa-2xl"></i>
+    </div>
+    {% for cat, list in app.flashes%}
+        {% for message in list %}
+            <div class="messageFlashe">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="scroll-add">
+        <div class="search-bar">
+            <input type="search" id="searchInput" placeholder="  Rechercher un ami">
+        </div>
+        <ul>
+            <div class="add-freinds">
+            {% for addfriend in addfriends %}
+            <div class="row-user">
+                <a href="{{path('user', {id: addfriend.id}) }}"><img  src="{{ asset(addfriend.picture)}}" alt=""></a>
+                <div class="row">
+                    {{addfriend.fullname}}
+                </div>
+                <a href="{{path('add-friend', {'id': addfriend.id} )}}">
+                    <div class="addUserIcone">
+                        <i class="fa-solid fa-user-plus fa-lg"></i>
+                    </div>
+                </a>
+               
+            </div> 
+                {% endfor %}
+            </div>
+        </ul>
+    </div>
+ 
+</div>
+
+
+<script defer>
+    let friendsDiv = document.getElementById('friendsDiv');
+    let addFriendsDiv = document.getElementById('addFriendsDiv');
+
+    // Récupérez les éléments d'icônes à l'intérieur des titres
+    let friendsIcon = document.getElementById('friendsIcon');
+    let addFriendsIcon = document.getElementById('addFriendsIcon');
+
+    // Ajoutez des écouteurs d'événements pour les clics sur les icônes
+    friendsIcon.addEventListener('click', function() {
+        // Affichez le premier div et cachez le deuxième div
+        friendsDiv.style.display = 'none';
+        addFriendsDiv.style.display = 'block';
+    });
+
+    addFriendsIcon.addEventListener('click', function() {
+        // Affichez le deuxième div et cachez le premier div
+        friendsDiv.style.display = 'block';
+        addFriendsDiv.style.display = 'none';
+    });
+
+    // Fonction pour échapper les caractères spéciaux HTML
+    function escapeHTML(input) {
+        return input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    
+</script>
+
