@@ -12,7 +12,7 @@ The user must log in to access the application where he can publish, like, comme
 - **Twig:** 
 - **Webpack Encore:**
                     - **SCSS** 
-                    - **JavaScript:** 
+                    - **JavaScript** 
 
 ### Backend :
 - **Symfony:** PHP Framework 
