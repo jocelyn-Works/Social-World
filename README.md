@@ -11,7 +11,7 @@ The user must log in to access the application where he can publish, like, comme
 ### Frontend :
 - **Twig:** 
 - **Webpack Encore:**
-                    - **SCSS:** 
+                    - **SCSS** 
                     - **JavaScript:** 
 
 ### Backend :
